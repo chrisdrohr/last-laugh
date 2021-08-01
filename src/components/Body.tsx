@@ -1,5 +1,6 @@
 import React from "react";
 import {makeStyles} from '@material-ui/core'
+import Posts from './Posts'
 
 const useStyles = makeStyles({
   body: {
@@ -10,7 +11,7 @@ const Body = () => {
   const styles = useStyles()
   return (
     <div className={styles.body}>
-      Hello
+      <Posts/>
     </div>
   );
 };
