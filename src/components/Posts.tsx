@@ -6,7 +6,7 @@ import { createStyles, makeStyles } from '@material-ui/core'
 import { useOnLoad } from 'constants/hooks'
 
 const useStyles = makeStyles(
-  ({ transitions: { create, duration, easing } }: any) =>
+  ({breakpoints, transitions: { create, duration, easing } }: any) =>
     createStyles({
       list: {
         display: 'grid',
@@ -18,7 +18,11 @@ const useStyles = makeStyles(
         transition: create(['opacity', 'transform'], duration.enteringScreen, easing.easeOut),
         opacity: loaded => loaded ? 1 : 0,
         transform: loaded => `translateY(${loaded ? 0 : 500}px)`,
-        transitionDelay: duration.enteringScreen
+        transitionDelay: duration.enteringScreen,
+        [breakpoints.up('md')]: {
+          maxWidth: 800,
+          gridTemplateColumns: '1fr 1fr',
+        }
       }
     })
 )
@@ -40,7 +44,7 @@ const Posts = () => {
   return (
     <div ref={ref} className={styles.list}>
       {posts.map((post, index) => (
-        <Post key={index} {...post} />
+        <Post key={index} index={index} {...post} />
       ))}
     </div>
   )

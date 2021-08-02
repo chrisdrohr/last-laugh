@@ -10,13 +10,22 @@ import {
 } from '@material-ui/core'
 import { blue } from '@material-ui/core/colors'
 import { CommentOutlined, ThumbUpOutlined } from '@material-ui/icons'
-import { IRedditPost } from 'constants/types'
 import numeral from 'numeral'
 
-type Props = IRedditPost
+type Props = {
+  author: string
+  backgroundColor: string
+  commentsCount: number
+  imageURL: string
+  permalink: string
+  title: string
+  upVotes: number
+  videoURL: string
+  index: number
+}
 
 const useStyles = makeStyles(
-  ({ palette, shadows, transitions: { create, duration, easing } }: any) =>
+  ({ breakpoints, palette, shadows, transitions: { create, duration, easing } }: any) =>
     createStyles({
       avatar: {
         overflow: 'visible',
@@ -32,6 +41,9 @@ const useStyles = makeStyles(
         ),
         '&:hover': {
           boxShadow: shadows[6]
+        },
+        [breakpoints.up('md')]: {
+          gridColumn: props => (props.index % 2) + 1,
         }
       },
       cardSubheader: {
