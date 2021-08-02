@@ -4,16 +4,15 @@ import {
   // Avatar,
   Toolbar,
   makeStyles,
-  createStyles
+  createStyles,
+  Typography
 } from '@material-ui/core'
 // import Logo from '../../logo.png';
 
-type Props = {}
 const useStyles = makeStyles(
   ({ palette, spacing, transitions: { create, duration, easing } }: any) =>
     createStyles({
       appBar: {
-        backgroundColor: palette.common.white,
         height: 56,
         transition: create('transform', duration.enteringScreen, easing.easeIn)
       },
@@ -34,7 +33,7 @@ const useStyles = makeStyles(
       }
     })
 )
-const Header = (props: Props) => {
+const Header = () => {
   const styles = useStyles()
   const [mounted, setMounted] = React.useState(false)
 
@@ -49,12 +48,15 @@ const Header = (props: Props) => {
       >
         <Toolbar disableGutters className={styles.toolbar}>
           {/*<Avatar className={styles.logo} src={Logo} />*/}
+          <Typography
+            variant={'h1'}
+            color='inherit'
+            className={styles.title}>
+            Last Laugh
+          </Typography>
         </Toolbar>
       </AppBar>
     </>
   )
-}
-Header.defaultProps = {
-  title: 'PEP'
 }
 export default Header

@@ -4,7 +4,7 @@ import Posts from './Posts'
 
 const useStyles = makeStyles({
   body: {
-    paddingTop: 56
+    padding: '56px 16px 16px 16px'
   }
 })
 const Body = () => {
