@@ -44,6 +44,9 @@ const useStyles = makeStyles(
         },
         [breakpoints.up('md')]: {
           gridColumn: props => (props.index % 2) + 1,
+        },
+        [breakpoints.up('lg')]: {
+          gridColumn: props => (props.index % 3) + 1,
         }
       },
       cardSubheader: {

@@ -22,7 +22,11 @@ const useStyles = makeStyles(
         [breakpoints.up('md')]: {
           maxWidth: 800,
           gridTemplateColumns: '1fr 1fr',
-        }
+        },
+        [breakpoints.up('lg')]: {
+          maxWidth: 1200,
+          gridTemplateColumns: '1fr 1fr 1fr',
+        },
       }
     })
 )
