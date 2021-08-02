@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 import {
   Card,
   CardActions,
@@ -11,11 +11,12 @@ import {
 import { blue } from '@material-ui/core/colors'
 import { CommentOutlined, ThumbUpOutlined } from '@material-ui/icons'
 import { IRedditPost } from 'constants/types'
+import numeral from 'numeral'
 
 type Props = IRedditPost
 
 const useStyles = makeStyles(
-  ({ palette, spacing, transitions: { create, duration, easing } }: any) =>
+  ({ palette, shadows, transitions: { create, duration, easing } }: any) =>
     createStyles({
       avatar: {
         overflow: 'visible',
@@ -23,7 +24,15 @@ const useStyles = makeStyles(
       },
       card: {
         gridColumn: 1,
-        backgroundColor: (props: Props) => props.backgroundColor
+        backgroundColor: (props: Props) => props.backgroundColor,
+        transition: create(
+          'box-shadow',
+          duration.enteringScreen,
+          easing.easeOut
+        ),
+        '&:hover': {
+          boxShadow: shadows[6]
+        }
       },
       cardSubheader: {
         color: palette.text.secondary
@@ -80,12 +89,20 @@ const Post = (props: Props) => {
       {/*)}*/}
 
       <CardActions style={{ justifyContent: 'flex-end' }}>
-        <Typography variant={'caption'} className={styles.iconInfo} title={'Comments'}>
+        <Typography
+          variant={'caption'}
+          className={styles.iconInfo}
+          title={'Comments'}
+        >
           {props.commentsCount}
           <CommentOutlined className={styles.icon} />
         </Typography>
-        <Typography variant={'caption'} className={styles.iconInfo} title={'Upvotes'}>
-          {props.upVotes}
+        <Typography
+          variant={'caption'}
+          className={styles.iconInfo}
+          title={'Upvotes'}
+        >
+          {numeral(props.upVotes).format('0.0a')}
           <ThumbUpOutlined style={{ top: -4 }} className={styles.icon} />
         </Typography>
       </CardActions>

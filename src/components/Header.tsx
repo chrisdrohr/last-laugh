@@ -1,13 +1,12 @@
 import React from 'react'
 import {
   AppBar,
-  // Avatar,
   Toolbar,
   makeStyles,
   createStyles,
   Typography
 } from '@material-ui/core'
-// import Logo from '../../logo.png';
+import { useOnLoad, useOnScroll } from "constants/hooks";
 
 const useStyles = makeStyles(
   ({ palette, spacing, transitions: { create, duration, easing } }: any) =>
@@ -35,19 +34,18 @@ const useStyles = makeStyles(
 )
 const Header = () => {
   const styles = useStyles()
-  const [mounted, setMounted] = React.useState(false)
+  const loaded = useOnLoad()
+  const scrollY = useOnScroll()
 
-  window.addEventListener('load', () => setMounted(true), { once: true })
   return (
     <>
       <AppBar
         className={styles.appBar}
         style={{
-          transform: mounted ? 'translateY(0)' : 'translateY(-200px)'
+          transform: loaded && scrollY < 128  ? 'translateY(0)' : 'translateY(-200px)'
         }}
       >
         <Toolbar disableGutters className={styles.toolbar}>
-          {/*<Avatar className={styles.logo} src={Logo} />*/}
           <Typography
             variant={'h1'}
             color='inherit'
